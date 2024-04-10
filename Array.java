@@ -11,7 +11,7 @@
 //   }
 // }
 
-package arrays;
+
 
 public class Array {
   public void printArray(int[] arr) {
