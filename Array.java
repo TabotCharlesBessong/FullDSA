@@ -65,6 +65,45 @@ public class Array {
     printArray(numbers);
   }
 
+  public static int findMinimum(int[] arr){
+    int min = arr[0];
+    for (int i = 1; i < arr.length; i++){
+      if(arr[i] < min){
+        min = arr[i];
+      }
+    }
+    return min;
+  }
+
+  public static int findMaximum(int[] arr){
+    int max = arr[0];
+    for (int i = 1; i < arr.length; i++){
+      if(arr[i] > max){
+        max = arr[i];
+      }
+    }
+    return max;
+  }
+
+  public static int[] sortedSquares(int[] arr){
+    // Two pointer technique
+    int n = arr.length;
+    int i = 0;
+    int j = n - 1;
+    int[] result = new int[n];
+
+    for (int k = n - 1; k>=0; k--){
+      if(Math.abs(arr[i]) > Math.abs(arr[j])){
+        result[k] = arr[i] * arr[i];
+        i++;
+      }else{
+        result[k] = arr[j] * arr[j];
+      }
+    }
+
+    return result;
+  }
+  
   public static void main(String[] args) {
     // Array Array = new Array();
     // Array.arrayDemo();
@@ -74,5 +113,14 @@ public class Array {
     printArray(removeOdd(arr));
     int[] rev = reverse(arr,0, arr.length - 1);
     printArray(rev);
+    System.out.println("Minimum Value in an array");
+    int minValue = findMinimum(arr);
+    System.out.println(minValue);
+    int maxValue = findMaximum(arr);
+    System.out.println("Minimum Value in an array");
+    System.out.println(maxValue);
+    int[] sorted = sortedSquares(arr);
+    System.out.println("Sorted array");
+    printArray(sorted);
   }
 }
