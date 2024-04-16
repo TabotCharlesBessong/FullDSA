@@ -85,6 +85,31 @@ public class Array {
     return max;
   }
 
+  public static int findSecondMax(int[] arr){
+    int max = Integer.MIN_VALUE;
+    int max2 = Integer.MIN_VALUE;
+    for (int i = 0; i < arr.length ; i++){
+      if(arr[i] > max){
+        max2 = max;
+        max = arr[i];
+      }else if(arr[i] > max2 && arr[i] != max) max2 = arr[i];
+    }
+    return max2;
+  }
+
+  public static int[] moveZero(int[] arr,int n){
+    int j = 0;
+    for (int i = 0; i < n; i++){
+      if(arr[i] != 0 && arr[j] ==0){
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+      }
+      if(arr[j] != 0) j++;
+    }
+    return arr;
+  }
+
   public static int[] sortedSquares(int[] arr){
     // Two pointer technique
     int n = arr.length;
@@ -107,7 +132,7 @@ public class Array {
   public static void main(String[] args) {
     // Array Array = new Array();
     // Array.arrayDemo();
-    int[] arr = {3,2,4,7,16,6,5,10,13,24,8};
+    int[] arr = {3,2,0,4,7,16,6,5,10,0,13,24,8};
     printArray(arr);
     printArray(removeEven(arr));
     printArray(removeOdd(arr));
@@ -117,10 +142,15 @@ public class Array {
     int minValue = findMinimum(arr);
     System.out.println(minValue);
     int maxValue = findMaximum(arr);
-    System.out.println("Minimum Value in an array");
+    System.out.println("Maximum Value in an array");
     System.out.println(maxValue);
-    int[] sorted = sortedSquares(arr);
-    System.out.println("Sorted array");
-    printArray(sorted);
+    int maxValue2 = findSecondMax(arr);
+    System.out.println("Second maximum Value in an array");
+    System.out.println(maxValue2);
+    // int[] sorted = sortedSquares(arr);
+    // System.out.println("Sorted array");
+    // printArray(sorted);
+    int[] zeros = moveZero(arr, arr.length);
+    printArray(zeros);
   }
 }
