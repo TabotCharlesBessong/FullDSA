@@ -128,6 +128,39 @@ public class Array {
 
     return result;
   }
+
+  public static int[] shrink(int[] arr, int capacity){
+    int[] temp = new int[capacity];
+    for(int i = 0; i < temp.length; i++) temp[i] = arr[i];
+    arr = temp;
+    return arr;
+  }
+
+  public static int[] grow(int[] arr, int capacity){
+    int[] temp = new int[capacity];
+    for(int i = 0; i < arr.length; i++) temp[i] = arr[i];
+    arr = temp;
+    return arr;
+  }
+
+  public static int missingNumber(int[] arr){
+    int n = arr.length + 1;
+    int sum = n * (n +1) / 2;
+    for(int num: arr) sum = sum - num;
+    return sum;
+  }
+
+  public static boolean palindrome(String word){
+    char[] charArr = word.toCharArray();
+    int start = 0;
+    int end = word.length() - 1;
+    while(start < end){
+      if(charArr[start] != charArr[end]) return false;
+      start++;
+      end--;
+    }
+    return true;
+  }
   
   public static void main(String[] args) {
     // Array Array = new Array();
@@ -152,5 +185,17 @@ public class Array {
     // printArray(sorted);
     int[] zeros = moveZero(arr, arr.length);
     printArray(zeros);
+    System.out.println("Shrinked array");
+    int[] resized = shrink(arr, 6);
+    printArray(resized);
+    System.out.println("Growned array");
+    int[] grown = grow(arr, 24);
+    printArray(grown);
+    int[] testArr = {1,2,3,4,5,7,8,9};
+    int missing = missingNumber(testArr);
+    System.out.println("Missing value in an array");
+    System.out.println(missing);
+    String word = "madam";
+    System.out.println(palindrome(word));
   }
 }
