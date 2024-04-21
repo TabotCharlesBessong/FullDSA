@@ -22,6 +22,7 @@ public class SignlyLinkedList {
       System.out.println(current.data + " --->");
       current = current.next;
     }
+    System.out.println("==============");
   }
 
   public void insertFirst(int value) {
@@ -41,6 +42,35 @@ public class SignlyLinkedList {
     return count;
   }
 
+  public void insert(int position, int value){
+    ListNode node = new ListNode(value);
+    if(position ==1){
+      node.next = head;
+      head = node;
+    }else{
+      ListNode previous  = head;
+      int count = 1;
+      while (count < position - 1){
+        previous = previous.next;
+        count++;
+      }
+      ListNode current = previous.next;
+      previous.next = node;
+      node.next = current;
+    }
+  }
+
+  public void insertLast(int value) {
+    ListNode newNode = new ListNode(value);
+    if(head == null){
+      head = newNode;
+      return;
+    }
+    ListNode current = head;
+    while (current.next != null) current = current.next;
+    current.next = newNode;
+  }
+
   public static void main(String[] args) {
     SignlyLinkedList sll1 = new SignlyLinkedList();
     sll1.insertFirst(4);
@@ -49,6 +79,11 @@ public class SignlyLinkedList {
     sll1.insertFirst(1);
     int len = sll1.length();
     System.out.println(len);
+    sll1.display();
+    sll1.insert(4, 5);
+    sll1.display();
+    sll1.insertLast(6);
+    sll1.insertLast(0);
     sll1.display();
   }
 }
