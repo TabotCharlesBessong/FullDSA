@@ -111,6 +111,16 @@ public class SignlyLinkedList {
     return current;
   }
 
+  public boolean find(int searchKey){
+    if(head == null) return false;
+    ListNode current = head;
+    while (current != null){
+      if(current.data == searchKey) return true;
+      current = current.next;
+    }
+    return false;
+  }
+
   public static void main(String[] args) {
     SignlyLinkedList sll1 = new SignlyLinkedList();
     sll1.insertFirst(4);
@@ -130,6 +140,7 @@ public class SignlyLinkedList {
     sll1.insertFirst(-2);
     sll1.display();
     sll1.delete(4);
+    System.out.println(sll1.find(6));
     sll1.display();
   }
 }
