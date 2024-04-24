@@ -71,6 +71,28 @@ public class SignlyLinkedList {
     current.next = newNode;
   }
 
+  public ListNode deleteFirst() {
+    if (head == null) return null;
+    ListNode temp = head;
+    head = head.next;
+    temp.next = null;
+    return temp;
+  }
+
+  public void delete(int position){
+    if(position == 1) head = head.next;
+    else {
+      ListNode previous = head;
+      int count = 1;
+      while (count < position - 1) {
+        previous = previous.next;
+        count++;
+      }
+      ListNode current = previous.next;
+      previous.next = current.next;
+    }
+  }
+
   public static void main(String[] args) {
     SignlyLinkedList sll1 = new SignlyLinkedList();
     sll1.insertFirst(4);
@@ -84,6 +106,11 @@ public class SignlyLinkedList {
     sll1.display();
     sll1.insertLast(6);
     sll1.insertLast(0);
+    sll1.display();
+    sll1.deleteFirst();
+    sll1.insertFirst(-2);
+    sll1.display();
+    sll1.delete(4);
     sll1.display();
   }
 }
