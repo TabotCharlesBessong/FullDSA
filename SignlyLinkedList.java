@@ -181,8 +181,26 @@ public class SignlyLinkedList {
     return value;
   }
 
+  public int reverse() {
+    int value;
+    if(head == null) return 0;
+    ListNode current = head;
+    ListNode previous = null;
+    ListNode next = null;
+
+    while(current != null){
+      next = current.next;
+      current.next = previous;
+      previous = current;
+      current = next;
+    }
+    value = previous.data;
+    return value;
+  }
+
   public static void main(String[] args) {
     SignlyLinkedList sll1 = new SignlyLinkedList();
+    // SinglyLinkedList
     sll1.insertFirst(4);
     sll1.insertFirst(3);
     sll1.insertFirst(2);
@@ -212,6 +230,9 @@ public class SignlyLinkedList {
     System.out.println(sll1.getNthValueFromStart(4));
     System.out.println(sll1.getNthValueFromEnd(3));
     sll1.display();
+    System.out.println("reversing a linked list");
+    int reverse = sll1.reverse();
+    System.out.println(reverse);
   }
 }
 
