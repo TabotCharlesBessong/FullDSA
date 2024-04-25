@@ -111,8 +111,96 @@ public class SignlyLinkedList {
     return current;
   }
 
+  public boolean find(int searchKey){
+    if(head == null) return false;
+    ListNode current = head;
+    while (current != null){
+      if(current.data == searchKey) return true;
+      current = current.next;
+    }
+    return false;
+  }
+
+  public int getMiddleValue(){
+    int value;
+    if(head == null) return 0;
+    ListNode slowPtr = head;
+    ListNode fastPtr = head;
+    while (fastPtr != null && fastPtr.next != null) {
+      slowPtr = slowPtr.next;
+      fastPtr = fastPtr.next.next;
+    }
+    value = slowPtr.data;
+    return value;
+  }
+
+  public int getNthValueFromEnd(int n){
+    if (head == null) return 0;
+    if(n <= 0) throw new IllegalArgumentException("Invalid value: n = "+ n);
+
+    ListNode mainPtr = head;
+    ListNode refPtr = head;
+    int count = 0;
+
+    while(count < n){
+      if(refPtr == null) throw new IllegalArgumentException(n + "is greater than the number of nodes in the list");
+      refPtr = refPtr.next;
+      count++;
+    }
+
+    while (refPtr != null){
+      refPtr = refPtr.next;
+      mainPtr = mainPtr.next;
+    }
+    int value = mainPtr.data;
+    return value;
+  }
+
+  public int getNthValueFromStart(int n) {
+    if (head == null)
+      return 0;
+    if (n <= 0)
+      throw new IllegalArgumentException("Invalid value: n = " + n);
+
+    // ListNode mainPtr = head;
+    ListNode refPtr = head;
+    int count = 0;
+
+    while (count < n) {
+      if (refPtr == null)
+        throw new IllegalArgumentException(n + "is greater than the number of nodes in the list");
+      refPtr = refPtr.next;
+      count++;
+    }
+
+    // while (refPtr != null) {
+    //   refPtr = refPtr.next;
+    //   mainPtr = mainPtr.next;
+    // }
+    int value = refPtr.data;
+    return value;
+  }
+
+  public int reverse() {
+    int value;
+    if(head == null) return 0;
+    ListNode current = head;
+    ListNode previous = null;
+    ListNode next = null;
+
+    while(current != null){
+      next = current.next;
+      current.next = previous;
+      previous = current;
+      current = next;
+    }
+    value = previous.data;
+    return value;
+  }
+
   public static void main(String[] args) {
     SignlyLinkedList sll1 = new SignlyLinkedList();
+    // SinglyLinkedList
     sll1.insertFirst(4);
     sll1.insertFirst(3);
     sll1.insertFirst(2);
@@ -130,7 +218,21 @@ public class SignlyLinkedList {
     sll1.insertFirst(-2);
     sll1.display();
     sll1.delete(4);
+    System.out.println(sll1.find(6));
+    System.out.println("Getting the middle element in the node list");
+    System.out.println(sll1.getMiddleValue());
+    sll1.insert(2, 8);
+    sll1.insertLast(7);
+    sll1.insertLast(9);
+    System.out.println("Getting the middle element in the node list");
+    System.out.println(sll1.getMiddleValue());
+    System.out.println("Getting n'th value from start and end of a list");
+    System.out.println(sll1.getNthValueFromStart(4));
+    System.out.println(sll1.getNthValueFromEnd(3));
     sll1.display();
+    System.out.println("reversing a linked list");
+    int reverse = sll1.reverse();
+    System.out.println(reverse);
   }
 }
 
