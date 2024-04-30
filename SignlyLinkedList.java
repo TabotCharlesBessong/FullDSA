@@ -232,9 +232,32 @@ public class SignlyLinkedList {
     eighth.next = second;
   }
 
+  private ListNode getStartingNode(ListNode slowPtr) {
+    ListNode temp = head;
+    while (temp != slowPtr) {
+      temp = temp.next;
+      slowPtr = slowPtr.next;
+    }
+    return temp; // starting node of the loop
+  }
+
+  public void removeLoop() {
+    ListNode fastPtr = head;
+    ListNode slowPtr = head;
+
+    while (fastPtr != null && fastPtr.next != null) {
+      fastPtr = fastPtr.next.next;
+      slowPtr = slowPtr.next;
+
+      if (fastPtr == slowPtr) {
+        removeLoop();
+        return;
+      }
+    }
+  }
+
   public static void main(String[] args) {
     SignlyLinkedList sll1 = new SignlyLinkedList();
-    SignlyLinkedList sll2 = new SignlyLinkedList();
     sll1.insertFirst(4);
     sll1.insertFirst(3);
     sll1.insertFirst(2);
@@ -250,6 +273,7 @@ public class SignlyLinkedList {
     sll1.display();
     sll1.deleteFirst();
     sll1.insertFirst(-2);
+    sll1.insert(4, 6);
     sll1.display();
     sll1.delete(4);
     System.out.println(sll1.find(6));
@@ -268,24 +292,6 @@ public class SignlyLinkedList {
     int reverse = sll1.reverse();
     System.out.println(reverse);
 
-    sll2.insertLast(1);
-    sll2.insertLast(2);
-    sll2.insertLast(3);
-    sll2.insertLast(4);
-    sll2.insertLast(5);
-    sll2.insertLast(6);
-    sll2.insertLast(7);
-    sll2.insertLast(8);
-    sll2.insertLast(2);
-    sll2.insertLast(3);
-    sll2.insertLast(4);
-    sll2.insertLast(5);
-    sll2.insertLast(6);
-    sll2.insertLast(7);
-    sll2.insertLast(8);
-
-    sll2.display();
-    System.out.println(sll2.containsLoop());
 
     SignlyLinkedList sll3 = new SignlyLinkedList();
     sll3.createALoopInLinkedList();
