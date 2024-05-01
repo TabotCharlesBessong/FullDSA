@@ -198,9 +198,66 @@ public class SignlyLinkedList {
     return value;
   }
 
+  public boolean containsLoop(){
+    ListNode fastPtr = head;
+    ListNode slowPtr = head;
+
+    while(fastPtr != null && fastPtr.next != null){
+      fastPtr = fastPtr.next.next;
+      slowPtr = slowPtr.next;
+
+      if(fastPtr == slowPtr) return true;
+    }
+    return false;
+  }
+
+  public void createALoopInLinkedList() {
+    ListNode first = new ListNode(1);
+    ListNode second = new ListNode(2);
+    ListNode third = new ListNode(3);
+    ListNode fourth = new ListNode(4);
+    ListNode fifth = new ListNode(5);
+    ListNode sixth = new ListNode(6);
+    ListNode seventh = new ListNode(7);
+    ListNode eighth = new ListNode(8);
+
+    head = first;
+    first.next = second;
+    second.next = third;
+    third.next = fourth;
+    fourth.next = fifth;
+    fifth.next = sixth;
+    sixth.next = seventh;
+    seventh.next = eighth;
+    eighth.next = second;
+  }
+
+  private ListNode getStartingNode(ListNode slowPtr) {
+    ListNode temp = head;
+    while (temp != slowPtr) {
+      temp = temp.next;
+      slowPtr = slowPtr.next;
+    }
+    return temp; // starting node of the loop
+  }
+
+  public void removeLoop() {
+    ListNode fastPtr = head;
+    ListNode slowPtr = head;
+
+    while (fastPtr != null && fastPtr.next != null) {
+      fastPtr = fastPtr.next.next;
+      slowPtr = slowPtr.next;
+
+      if (fastPtr == slowPtr) {
+        removeLoop();
+        return;
+      }
+    }
+  }
+
   public static void main(String[] args) {
     SignlyLinkedList sll1 = new SignlyLinkedList();
-    // SinglyLinkedList
     sll1.insertFirst(4);
     sll1.insertFirst(3);
     sll1.insertFirst(2);
@@ -216,6 +273,7 @@ public class SignlyLinkedList {
     sll1.display();
     sll1.deleteFirst();
     sll1.insertFirst(-2);
+    sll1.insert(4, 6);
     sll1.display();
     sll1.delete(4);
     System.out.println(sll1.find(6));
@@ -233,6 +291,12 @@ public class SignlyLinkedList {
     System.out.println("reversing a linked list");
     int reverse = sll1.reverse();
     System.out.println(reverse);
+
+
+    SignlyLinkedList sll3 = new SignlyLinkedList();
+    sll3.createALoopInLinkedList();
+    // sll3.display();
+    System.out.println(sll3.containsLoop());
   }
 }
 
