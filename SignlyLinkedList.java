@@ -232,14 +232,14 @@ public class SignlyLinkedList {
     eighth.next = second;
   }
 
-  private ListNode getStartingNode(ListNode slowPtr) {
-    ListNode temp = head;
-    while (temp != slowPtr) {
-      temp = temp.next;
-      slowPtr = slowPtr.next;
-    }
-    return temp; // starting node of the loop
-  }
+  // private ListNode getStartingNode(ListNode slowPtr) {
+  //   ListNode temp = head;
+  //   while (temp != slowPtr) {
+  //     temp = temp.next;
+  //     slowPtr = slowPtr.next;
+  //   }
+  //   return temp; // starting node of the loop
+  // }
 
   public void removeLoop() {
     ListNode fastPtr = head;
@@ -256,8 +256,18 @@ public class SignlyLinkedList {
     }
   }
 
+  public void removeDuplicates(){
+    if(head == null) return;
+    ListNode current = head;
+    while(current != null && current.next != null){
+      if(current.data == current.next.data) current.next = current.next.next;
+      else current = current.next;
+    }
+  }
+
   public static void main(String[] args) {
     SignlyLinkedList sll1 = new SignlyLinkedList();
+    SignlyLinkedList sll4 = new SignlyLinkedList();
     sll1.insertFirst(4);
     sll1.insertFirst(3);
     sll1.insertFirst(2);
@@ -287,6 +297,7 @@ public class SignlyLinkedList {
     System.out.println("Getting n'th value from start and end of a list");
     System.out.println(sll1.getNthValueFromStart(4));
     System.out.println(sll1.getNthValueFromEnd(3));
+    sll1.insertLast(8);
     sll1.display();
     System.out.println("reversing a linked list");
     int reverse = sll1.reverse();
@@ -297,6 +308,18 @@ public class SignlyLinkedList {
     sll3.createALoopInLinkedList();
     // sll3.display();
     System.out.println(sll3.containsLoop());
+
+    sll4.insertLast(0);
+    sll4.insertLast(1);
+    sll4.insertLast(2);
+    sll4.insertLast(3);
+    sll4.insertLast(3);
+    sll4.insertLast(3);
+    sll4.insertLast(4);
+
+    sll4.display();
+    sll4.removeDuplicates();
+    sll4.display();
   }
 }
 
