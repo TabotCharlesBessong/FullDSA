@@ -263,10 +263,19 @@ public class SignlyLinkedList {
       slowPtr = slowPtr.next;
 
       if (fastPtr == slowPtr) {
-        removeLoop();
+        removeLoop(slowPtr);
         return;
       }
     }
+  }
+
+  private void removeLoop(ListNode slowPtr){
+    ListNode temp = head;
+    while (temp.next != slowPtr.next){
+      temp = temp.next;
+      slowPtr = slowPtr.next;
+    }
+    slowPtr.next = null;
   }
 
   public void removeDuplicates(){
@@ -339,8 +348,9 @@ public class SignlyLinkedList {
     System.out.println("Detection of a starting node in a linked list");
     sll3.createALoopInLinkedList();
     System.out.println(sll3.startNodeInALoop().data);
-    // sll3.display();
     System.out.println(sll3.containsLoop());
+    sll3.removeLoop();
+    sll3.display();
 
     sll4.insertLast(0);
     sll4.insertLast(1);
