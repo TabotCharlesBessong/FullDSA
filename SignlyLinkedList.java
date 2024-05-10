@@ -232,14 +232,27 @@ public class SignlyLinkedList {
     eighth.next = second;
   }
 
-  // private ListNode getStartingNode(ListNode slowPtr) {
-  //   ListNode temp = head;
-  //   while (temp != slowPtr) {
-  //     temp = temp.next;
-  //     slowPtr = slowPtr.next;
-  //   }
-  //   return temp; // starting node of the loop
-  // }
+  private ListNode getStartingNode(ListNode slowPtr) {
+    ListNode temp = head;
+    while (temp != slowPtr) {
+      temp = temp.next;
+      slowPtr = slowPtr.next;
+    }
+    return temp; // starting node of the loop
+  }
+
+  public ListNode startNodeInALoop(){
+    ListNode fastPtr = head;
+    ListNode slowPtr = head;
+
+    while (fastPtr != null && fastPtr.next != null){
+      fastPtr = fastPtr.next.next;
+      slowPtr = slowPtr.next;
+
+      if(fastPtr == slowPtr) return getStartingNode(slowPtr);
+    }
+    return null;
+  }
 
   public void removeLoop() {
     ListNode fastPtr = head;
@@ -323,7 +336,9 @@ public class SignlyLinkedList {
 
 
     SignlyLinkedList sll3 = new SignlyLinkedList();
+    System.out.println("Detection of a starting node in a linked list");
     sll3.createALoopInLinkedList();
+    System.out.println(sll3.startNodeInALoop().data);
     // sll3.display();
     System.out.println(sll3.containsLoop());
 
