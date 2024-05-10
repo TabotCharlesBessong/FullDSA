@@ -305,6 +305,26 @@ public class SignlyLinkedList {
     return head;
   }
 
+  public static ListNode merge(ListNode a, ListNode b){
+    ListNode dummy = new ListNode(0);
+    ListNode tail = dummy;
+    while(a != null && b != null){
+      if(a.data <= b.data){
+        tail.next = a;
+        a = a.next;
+      }else {
+        tail.next = b;
+        b = b.next;
+      }
+      tail = tail.next;
+    }
+
+    if(a == null) tail.next = b;
+    else tail.next = a;
+
+    return dummy.next;
+  }
+
   public static void main(String[] args) {
     SignlyLinkedList sll1 = new SignlyLinkedList();
     SignlyLinkedList sll4 = new SignlyLinkedList();
@@ -365,6 +385,31 @@ public class SignlyLinkedList {
     sll4.display();
     sll4.removeDuplicates();
     sll4.display();
+
+    SignlyLinkedList sll5 = new SignlyLinkedList();
+    sll5.insertLast(0);
+    sll5.insertLast(2);
+    sll5.insertLast(4);
+    sll5.insertLast(6);
+    sll5.insertLast(8);
+    sll5.insertLast(9);
+    sll5.insertLast(10);
+    System.out.println("List node 1");
+    sll5.display();
+
+    SignlyLinkedList sll6 = new SignlyLinkedList();
+    sll6.insertLast(1);
+    sll6.insertLast(3);
+    sll6.insertLast(5);
+    sll6.insertLast(7);
+    sll6.insertLast(11);
+    System.out.println("List node 2");
+    sll6.display();
+    
+    SignlyLinkedList sll7 = new SignlyLinkedList();
+    sll7.head = merge(sll5.head, sll6.head);
+    System.out.println("List node 3");
+    sll7.display();
   }
 }
 
