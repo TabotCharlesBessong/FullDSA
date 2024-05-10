@@ -241,6 +241,19 @@ public class SignlyLinkedList {
     return temp; // starting node of the loop
   }
 
+  public ListNode startNodeInALoop(){
+    ListNode fastPtr = head;
+    ListNode slowPtr = head;
+
+    while (fastPtr != null && fastPtr.next != null){
+      fastPtr = fastPtr.next.next;
+      slowPtr = slowPtr.next;
+
+      if(fastPtr == slowPtr) return getStartingNode(slowPtr);
+    }
+    return null;
+  }
+
   public void removeLoop() {
     ListNode fastPtr = head;
     ListNode slowPtr = head;
@@ -250,14 +263,71 @@ public class SignlyLinkedList {
       slowPtr = slowPtr.next;
 
       if (fastPtr == slowPtr) {
-        removeLoop();
+        removeLoop(slowPtr);
         return;
       }
     }
   }
 
+  private void removeLoop(ListNode slowPtr){
+    ListNode temp = head;
+    while (temp.next != slowPtr.next){
+      temp = temp.next;
+      slowPtr = slowPtr.next;
+    }
+    slowPtr.next = null;
+  }
+
+  public void removeDuplicates(){
+    if(head == null) return;
+    ListNode current = head;
+    while(current != null && current.next != null){
+      if(current.data == current.next.data) current.next = current.next.next;
+      else current = current.next;
+    }
+  }
+
+  public ListNode insertInSortedList(int value){
+    ListNode newNode = new ListNode(value);
+
+    if(head == null) return newNode;
+
+    ListNode current = head;
+    ListNode temp = null;
+
+    while(current != null && current.data < newNode.data){
+      temp = current;
+      current = current.next;
+    }
+
+    newNode.next = current;
+    temp.next = newNode;
+    return head;
+  }
+
+  public static ListNode merge(ListNode a, ListNode b){
+    ListNode dummy = new ListNode(0);
+    ListNode tail = dummy;
+    while(a != null && b != null){
+      if(a.data <= b.data){
+        tail.next = a;
+        a = a.next;
+      }else {
+        tail.next = b;
+        b = b.next;
+      }
+      tail = tail.next;
+    }
+
+    if(a == null) tail.next = b;
+    else tail.next = a;
+
+    return dummy.next;
+  }
+
   public static void main(String[] args) {
     SignlyLinkedList sll1 = new SignlyLinkedList();
+    SignlyLinkedList sll4 = new SignlyLinkedList();
     sll1.insertFirst(4);
     sll1.insertFirst(3);
     sll1.insertFirst(2);
@@ -287,6 +357,7 @@ public class SignlyLinkedList {
     System.out.println("Getting n'th value from start and end of a list");
     System.out.println(sll1.getNthValueFromStart(4));
     System.out.println(sll1.getNthValueFromEnd(3));
+    sll1.insertLast(8);
     sll1.display();
     System.out.println("reversing a linked list");
     int reverse = sll1.reverse();
@@ -294,9 +365,51 @@ public class SignlyLinkedList {
 
 
     SignlyLinkedList sll3 = new SignlyLinkedList();
+    System.out.println("Detection of a starting node in a linked list");
     sll3.createALoopInLinkedList();
-    // sll3.display();
+    System.out.println(sll3.startNodeInALoop().data);
     System.out.println(sll3.containsLoop());
+    sll3.removeLoop();
+    sll3.display();
+
+    sll4.insertLast(0);
+    sll4.insertLast(1);
+    sll4.insertLast(2);
+    sll4.insertLast(3);
+    sll4.insertLast(3);
+    sll4.insertLast(3);
+    sll4.insertLast(4);
+    sll4.insertLast(7);
+    sll4.insertInSortedList(5);
+
+    sll4.display();
+    sll4.removeDuplicates();
+    sll4.display();
+
+    SignlyLinkedList sll5 = new SignlyLinkedList();
+    sll5.insertLast(0);
+    sll5.insertLast(2);
+    sll5.insertLast(4);
+    sll5.insertLast(6);
+    sll5.insertLast(8);
+    sll5.insertLast(9);
+    sll5.insertLast(10);
+    System.out.println("List node 1");
+    sll5.display();
+
+    SignlyLinkedList sll6 = new SignlyLinkedList();
+    sll6.insertLast(1);
+    sll6.insertLast(3);
+    sll6.insertLast(5);
+    sll6.insertLast(7);
+    sll6.insertLast(11);
+    System.out.println("List node 2");
+    sll6.display();
+    
+    SignlyLinkedList sll7 = new SignlyLinkedList();
+    sll7.head = merge(sll5.head, sll6.head);
+    System.out.println("List node 3");
+    sll7.display();
   }
 }
 
