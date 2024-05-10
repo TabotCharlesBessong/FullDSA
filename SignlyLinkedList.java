@@ -265,6 +265,24 @@ public class SignlyLinkedList {
     }
   }
 
+  public ListNode insertInSortedList(int value){
+    ListNode newNode = new ListNode(value);
+
+    if(head == null) return newNode;
+
+    ListNode current = head;
+    ListNode temp = null;
+
+    while(current != null && current.data < newNode.data){
+      temp = current;
+      current = current.next;
+    }
+
+    newNode.next = current;
+    temp.next = newNode;
+    return head;
+  }
+
   public static void main(String[] args) {
     SignlyLinkedList sll1 = new SignlyLinkedList();
     SignlyLinkedList sll4 = new SignlyLinkedList();
@@ -316,6 +334,8 @@ public class SignlyLinkedList {
     sll4.insertLast(3);
     sll4.insertLast(3);
     sll4.insertLast(4);
+    sll4.insertLast(7);
+    sll4.insertInSortedList(5);
 
     sll4.display();
     sll4.removeDuplicates();
