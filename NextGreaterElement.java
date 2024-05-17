@@ -21,7 +21,8 @@ public class NextGreaterElement {
   }
 
   public static void main(String[] args){
-    int[] nums = {4,2,8,1,6,5,9,7};
+    // int[] nums = {4,2,8,1,6,5,9,7};
+    int[] nums = {2,4,75,8,76,90,77,54};
     int[] nextGreater = findNextGreaterElements(nums);
     System.out.println("Next greater elements: " + Arrays.toString(nextGreater));
   }
