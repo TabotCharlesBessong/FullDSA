@@ -12,6 +12,13 @@ public class BinaryTree {
     }
   }
 
+  public void recursivePreOrder(TreeNode root){
+    if(root == null) return;
+    System.out.println(root.data + " ");
+    recursivePreOrder(root.left);
+    recursivePreOrder(root.right);
+  }
+
   public void createBinaryTree(){
     TreeNode first = new TreeNode(1);
     TreeNode second = new TreeNode(2);
@@ -33,5 +40,6 @@ public class BinaryTree {
   public static void main(String[] args) {
     BinaryTree bt = new BinaryTree();
     bt.createBinaryTree();
+    bt.recursivePreOrder(bt.root);
   }
 }
