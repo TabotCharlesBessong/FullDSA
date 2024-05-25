@@ -34,6 +34,16 @@ public class BinaryTree {
     }
   }
 
+  public void recursiveInOrder(TreeNode root) {
+    if (root == null) {
+      return;
+    }
+
+    recursiveInOrder(root.left);
+    System.out.print(root.data + " ");
+    recursiveInOrder(root.right);
+  }
+
   public void createBinaryTree(){
     TreeNode first = new TreeNode(1);
     TreeNode second = new TreeNode(2);
@@ -56,6 +66,7 @@ public class BinaryTree {
     BinaryTree bt = new BinaryTree();
     bt.createBinaryTree();
     // bt.recursivePreOrder(bt.root);
-    bt.iterativePreOrder();
+    // bt.iterativePreOrder();
+    bt.recursiveInOrder(bt.root);
   }
 }
