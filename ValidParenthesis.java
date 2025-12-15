@@ -26,7 +26,7 @@ public class ValidParenthesis {
     String bracket = "({[[{({[]})}]]})";
     String bracket1 = "({[[{(]}}]]})";
     // int[] nextGreater = findNextGreaterElements(nums);
-    System.out.println("The string is a valid parenthesis: " + iaValid(bracket));
-    System.out.println("The string is a valid parenthesis: " + iaValid(bracket1));
+    System.out.println("The string is a valid parenthesis: " + bracket + " " + iaValid(bracket));
+    System.out.println("The string is a valid parenthesis: " + bracket1 + " " + iaValid(bracket1));
   }
 }

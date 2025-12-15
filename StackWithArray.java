@@ -45,10 +45,13 @@ public class StackWithArray {
    }
 
    public static void main(String[] args) {
-      StackWithArray stack = new StackWithArray(3);
+      StackWithArray stack = new StackWithArray(6);
       stack.push(10);
       stack.push(15);
       stack.push(20);
+      stack.push(30);
+      stack.push(5);
+      stack.push(25);
 
       System.out.println(stack.peek());
       stack.pop();
@@ -57,5 +60,6 @@ public class StackWithArray {
       System.out.println(stack.peek());
       stack.pop();
       stack.pop();
+      System.out.println(stack.peek());
    }
 }
