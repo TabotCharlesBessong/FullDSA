@@ -14,12 +14,20 @@ public class Cynlinder {
     radius = r;
   }
 
+  /*
+   * The method will take the radius and height of the cylinder and return us the
+   * volume of the cylinder
+   */
   public double getVolume(){
     double volume = pi * radius * radius * height;
     return volume;
   }
 
   // get surface area
+  /*
+   * The method will take the radius and height of the cylinder and return us the
+   * surface aread of the cylinder
+   */
   public double getSurfaceArea(){
     double surfaceArea = 2 * pi * radius * (radius + height);
     return surfaceArea;
