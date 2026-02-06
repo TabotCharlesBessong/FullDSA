@@ -16,10 +16,10 @@ public class EmployeeTest {
         // Demonstrate runtime polymorphism
         System.out.println("=== Demonstrating Runtime Polymorphism ===");
         Employee[] employees = {
-            fullTime1,
-            fullTime2,
-            partTime1,
-            partTime2
+                fullTime1,
+                fullTime2,
+                partTime1,
+                partTime2
         };
 
         for (Employee emp : employees) {

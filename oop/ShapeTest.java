@@ -19,9 +19,9 @@ public class ShapeTest {
         // Using polymorphism with Shape array
         System.out.println("\n=== Using Polymorphism ===");
         Shape[] shapes = {
-            new Circle(7.0),
-            new Rectangle(5.0, 8.0),
-            new Triangle(6.0, 9.0)
+                new Circle(7.0),
+                new Rectangle(5.0, 8.0),
+                new Triangle(6.0, 9.0)
         };
 
         for (Shape shape : shapes) {

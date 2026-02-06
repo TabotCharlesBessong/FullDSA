@@ -17,8 +17,8 @@ public class PayableTest {
         // Using polymorphism with Payable array
         System.out.println("\n=== Using Polymorphism with Interface ===");
         Payable[] payables = {
-            new EmployeePayable("Alice Johnson", 1002, 6000.0),
-            new Contractor("Bob Williams", 2002, 55.0, 100)
+                new EmployeePayable("Alice Johnson", 1002, 6000.0),
+                new Contractor("Bob Williams", 2002, 55.0, 100)
         };
 
         for (Payable payable : payables) {

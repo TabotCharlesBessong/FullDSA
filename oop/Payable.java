@@ -6,5 +6,6 @@ package oop;
  */
 public interface Payable {
     double calculatePay();
+
     void generatePayslip();
 }
